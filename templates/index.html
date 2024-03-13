@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title style="font-family: Arial, sans-serif; font-size: 20px;">Product Recommendation Model</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: peach; /* Set background color to peach */
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .header {
+            font-size: 40px;
+            color: #ff7f50;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-weight: bold; /* Bold the header */
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .btn-primary {
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #ff7f50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: #ff6347;
+        }
+
+        .styled-table {
+            width: 100%;
+            margin: 25px 0;
+            font-size: 1em;
+            font-family: sans-serif;
+            text-align: left;
+            border-collapse: collapse;
+        }
+
+        .styled-table th, .styled-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .styled-table th {
+            background-color: #333;
+            color: white;
+        }
+
+        .styled-table tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .decorative-text {
+            font-size: 24px;
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #ff7f50;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Change font and size for the head section */
+        head {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+
+        /* Change font style for the title tag */
+        title {
+            font-family: Arial, sans-serif;
+            font-size: 20px;
+        }
+
+        /* Change font style for the link tags */
+        link {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="header">Sentiment Based Product Recommendation System</h1>
+
+        <form class="mt-5" action="{{ url_for('predict')}}" method="post">
+            <div class="form-group">
+                <label for="username">Enter the Username and press "Submit" button to get the top 5 product recommendations</label>
+                <input type="text" class="form-control" name="username" placeholder="User Name" required="required" />
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </form>
+
+        <h1 class="header mt-5">{{ message_display }}</h1>
+
+        <div>
+            <h1 class="decorative-text">Top 5 Recommended Products</h1>
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for op in output %}
+                    <tr>
+                        <td>{{op}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
